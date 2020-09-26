@@ -14,7 +14,7 @@ namespace SistemaBancario.Domain.Services
         }
         public void Deposit(BankAccountModel bankAccountModel, double value)
         {
-            var result = bankAccountModel.Deposit(value);
+            bankAccountModel.Deposit(value);
             // TODO: NOTIFY OBSERVERS
             throw new NotImplementedException();
         }

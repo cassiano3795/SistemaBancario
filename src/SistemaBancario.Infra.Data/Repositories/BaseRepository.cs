@@ -11,8 +11,8 @@ namespace SistemaBancario.Infra.Data.Repositories
     public class BaseRepository<T> : IRepository<T> where T : BaseModel
     {
         private bool disposedValue;
-        private readonly AppDbContext _appDbContext;
-        private readonly DbSet<T> _set;
+        protected readonly AppDbContext _appDbContext;
+        protected readonly DbSet<T> _set;
 
         public BaseRepository(AppDbContext appDbContext)
         {

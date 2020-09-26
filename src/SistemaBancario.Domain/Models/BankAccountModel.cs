@@ -34,10 +34,10 @@ namespace SistemaBancario.Domain.Models
         /// </summary>
         /// <param name="value">Deposit amount.</param>
         /// <returns></returns>
-        public double Deposit(double value)
+        public void Deposit(double value)
         {
             Balance += value;
-            return Balance;
+            return;
         }
 
         /// <summary>

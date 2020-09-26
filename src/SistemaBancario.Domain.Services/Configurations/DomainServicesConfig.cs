@@ -6,7 +6,7 @@ using SistemaBancario.Domain.Services;
 
 namespace SistemaBancario.Domain.Configurations
 {
-    public static class DomainConfig
+    public static class DomainServicesConfig
     {
         public static void AddDomainServices(this IServiceCollection services)
         {

@@ -13,6 +13,7 @@
     <ProjectReference Include="..\SistemaBancario.Infra.Data\SistemaBancario.Infra.Data.csproj" />
     <ProjectReference Include="..\SistemaBancario.Domain\SistemaBancario.Domain.csproj" />
     <ProjectReference Include="..\SistemaBancario.Domain.Services\SistemaBancario.Domain.Services.csproj" />
+    <ProjectReference Include="..\SistemaBancario.Application\SistemaBancario.Application.csproj" />
   </ItemGroup>
 
 </Project>

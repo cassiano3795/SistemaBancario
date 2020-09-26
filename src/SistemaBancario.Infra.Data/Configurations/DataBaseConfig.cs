@@ -16,7 +16,8 @@ namespace SistemaBancario.Infra.Data.Configurations
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
             services.AddDbContext<AppDbContext>(options => 
-                options.UseMySql(configuration.GetConnectionString("sistemabancario")));
+                options.UseMySql(configuration.GetConnectionString("SistemaBancario"),
+                    b => b.MigrationsAssembly("SistemaBancario.UI.Web")));
         }
 
         public static void AddRepositories(this IServiceCollection services)

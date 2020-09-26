@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SistemaBancario.Infra.Data.Configurations;
 using SistemaBancario.Domain.Configurations;
+using SistemaBancario.Application.Configurations;
 
 namespace SistemaBancario.Infra.IoC
 {
@@ -21,6 +22,12 @@ namespace SistemaBancario.Infra.IoC
 
             // ADD DOMAIN SERVICES
             services.AddDomainServices();
+
+            // ADD APP SERVICES
+            services.AddAppServices();
+
+            // ADD AUTOMAPPER
+            services.AddAutoMapperConfiguration();
         }
     }
 }

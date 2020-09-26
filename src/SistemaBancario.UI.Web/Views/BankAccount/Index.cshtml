@@ -1,0 +1,17 @@
+﻿@model SistemaBancario.Application.ViewModels.BankAccount.BankAccountWithTransactionsViewModel
+
+@{
+    ViewData["Title"] = "Bank Account";
+}
+
+@* <div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div> *@
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-12">
+        <h1>Saldo</h1>
+        <h3 class="alert-success">@Model.BankAccount.Balance</h3>
+    </div>
+</div>
