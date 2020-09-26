@@ -30,6 +30,7 @@ namespace SistemaBancario.Infra.Data.Repositories
                     Transactions = s.Transactions.Select(t => new TransactionDto{
                         Description = t.Description,
                         TransactionType = t.TransactionType,
+                        CreatedAt = t.CreatedAt,
                         Value = t.Value
                     }).ToList()
                 }).FirstOrDefaultAsync();

@@ -1,0 +1,26 @@
+@model List<SistemaBancario.Application.ViewModels.Transaction.TransactionViewModel>
+
+<hr>
+<h4 class="d-flex mt-1 justify-content-between align-items-center mb-3">
+    <span class="text-muted">Histórico</span>
+</h4>
+
+<ul class="list-group mb-3">
+    @foreach (var transaction in Model)
+    {
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+                <h6 class="my-0">@transaction.Description</h6>
+                <small class="text-muted">@transaction.CreatedAt.ToString("dd/MM/yyyy")</small>
+            </div>
+            <span class="d-flex align-items-center text-success">$@transaction.Value.ToString("0.00")</span>
+        </li>
+    }
+
+    @if (Model.Count == 0){
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <span class="d-flex align-items-center text-muted">Sem histórico</span>
+        </li>
+    }
+    
+</ul>

@@ -1,3 +1,4 @@
+using System;
 using SistemaBancario.Domain.Enums;
 
 namespace SistemaBancario.Application.ViewModels.Transaction
@@ -6,6 +7,7 @@ namespace SistemaBancario.Application.ViewModels.Transaction
     {
         public double Value { get; set; }
         public string Description { get; set; }
+        public DateTime CreatedAt { get; set; }
         public TransactionEnum TransactionType { get; set; }
     }
 }
