@@ -11,7 +11,7 @@ namespace SistemaBancario.Application.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddAutoMapper(typeof(DtoToViewModelMappingProfile));
+            services.AddAutoMapper(typeof(DtoToViewModelMappingProfile), typeof(ModelToViewModelMappingProfile));
         }
     }
 }

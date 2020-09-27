@@ -6,9 +6,15 @@
 </h4>
 
 <ul class="list-group mb-3">
-    @foreach (var transaction in Model)
+    @foreach (var transactionGrp in Model.GroupBy(g => g.CreatedAt.Date))
     {
-        var textClass = string.Empty;
+        <li class="list-group-item d-flex justify-content-between list-group-item-secondary lh-condensed">
+            <span class="d-flex align-items-center">@transactionGrp.Key.ToString("dd/MM/yyyy")</span>
+        </li>
+
+        foreach (var transaction in transactionGrp.Select(s => s))
+        {
+            var textClass = string.Empty;
         if (transaction.TransactionType == TransactionEnum.Withdraw || transaction.TransactionType == TransactionEnum.Payment)
         {
             textClass = "text-danger";
@@ -21,8 +27,9 @@
                 <h6 class="my-0">@transaction.Description</h6>
                 <small class="text-muted">@transaction.CreatedAt.ToString("dd/MM/yyyy")</small>
             </div>
-            <span class="d-flex align-items-center @textClass">$@transaction.Value.ToString("0.00")</span>
+            <span class="d-flex align-items-center @textClass">R$@string.Format("{0:N2}", transaction.Value)</span>
         </li>
+        }
     }
 
     @if (Model.Count == 0){

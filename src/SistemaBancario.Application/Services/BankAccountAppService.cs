@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using SistemaBancario.Application.Interfaces;
@@ -25,6 +26,12 @@ namespace SistemaBancario.Application.Services
         public Task<BankAccountViewModel> GetByIdAsync(Guid id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IList<BankAccountViewModel>> GetAllAsync()
+        {
+            var listBankAccount = _mapper.Map<IList<BankAccountViewModel>>(await _bankAccountRepository.SelectAllAsync());
+            return listBankAccount;
         }
 
         public async Task<BankAccountWithTransactionsViewModel> GetBankAccountWithTransactionsByIdAsync(Guid id)
@@ -64,5 +71,7 @@ namespace SistemaBancario.Application.Services
 
             return result;
         }
+
+        
     }
 }

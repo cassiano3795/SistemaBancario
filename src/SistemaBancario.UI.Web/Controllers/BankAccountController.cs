@@ -24,7 +24,7 @@ namespace SistemaBancario.UI.Web.Controllers
 
         public async Task<IActionResult> IndexAsync()
         {
-            var id = new Guid("1d10e7a5-0fd5-4e48-b0b5-4dd97ad1fd7e");
+            var id = (await _accountAppService.GetAllAsync()).FirstOrDefault().Id;
             var bankAccountViewModel = await _accountAppService.GetBankAccountWithTransactionsByIdAsync(id);
             return View(bankAccountViewModel);
         }
