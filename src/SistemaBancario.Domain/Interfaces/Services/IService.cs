@@ -10,8 +10,8 @@ namespace SistemaBancario.Domain.Interfaces.Services
          Task<T> GetAsync(Guid id);
          Task<IList<T>> GetAllAsync();
 
-         Task<T> Create(T model);
-         Task<T> Update(T model);
-         Task<T> Remove(Guid id);
+         Task<bool> CreateAsync(T model);
+         Task<bool> UpdateAsync(T model);
+         Task<bool> RemoveAsync(Guid id);
     }
 }

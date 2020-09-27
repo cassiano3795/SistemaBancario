@@ -13,5 +13,8 @@ namespace SistemaBancario.Domain.Interfaces.Repositories
          Task InsertAsync(T model);
          Task UpdateAsync(T model);
          Task DeleteAsync(T model);
+
+         Task<bool> SaveChangesAsync();
+         bool SaveChanges();
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SistemaBancario.Domain.Interfaces.Repositories;
 using SistemaBancario.Domain.Interfaces.Services;
 using SistemaBancario.Domain.Models;
 
@@ -8,28 +9,44 @@ namespace SistemaBancario.Domain.Services
 {
     public class BaseService<T> : IService<T> where T : BaseModel
     {
-        // private readonly BaseRepository<T> _ba
+        private readonly IRepository<T> _baseRepository;
+
+        public BaseService(IRepository<T> baseRepository)
+        {
+            _baseRepository = baseRepository;
+        }
+
         private bool disposedValue;
 
-        public Task<T> GetAsync(Guid id)
+        public async Task<T> GetAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var item = await _baseRepository.SelectAsync(id);
+            return item;
         }
-        public Task<IList<T>> GetAllAsync()
+        public async Task<IList<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _baseRepository.SelectAllAsync();
         }
-        public Task<T> Create(T model)
+        public async Task<bool> CreateAsync(T model)
         {
-            throw new NotImplementedException();
+            await _baseRepository.InsertAsync(model);
+            var result = await _baseRepository.SaveChangesAsync();
+            return result;
         }
-        public Task<T> Remove(Guid id)
+        public async Task<bool> RemoveAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var model = await _baseRepository.SelectAsync(id);
+            await _baseRepository.DeleteAsync(model);
+            var result = await _baseRepository.SaveChangesAsync();
+
+            return result;
         }
-        public Task<T> Update(T model)
+        public async Task<bool> UpdateAsync(T model)
         {
-            throw new NotImplementedException();
+            await _baseRepository.UpdateAsync(model);
+            var result = await _baseRepository.SaveChangesAsync();
+
+            return result;
         }
 
         protected virtual void Dispose(bool disposing)

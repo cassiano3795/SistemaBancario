@@ -49,6 +49,7 @@ namespace SistemaBancario.Infra.Data.Repositories
             try
             {
                 model.Id = model.Id == Guid.Empty ? Guid.NewGuid() : model.Id;
+                model.CreatedAt = model.CreatedAt == DateTime.MinValue ? DateTime.UtcNow : model.CreatedAt;
 
                 await _set.AddAsync(model);
                 return;
@@ -84,6 +85,30 @@ namespace SistemaBancario.Infra.Data.Repositories
 
                 _set.Remove(modelDb);
                 return;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            try
+            {
+                return await _appDbContext.SaveChangesAsync() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool SaveChanges()
+        {
+            try
+            {
+                return _appDbContext.SaveChanges() > 0;
             }
             catch (Exception ex)
             {

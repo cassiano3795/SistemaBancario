@@ -1,12 +1,14 @@
 using System;
+using System.Threading.Tasks;
+using SistemaBancario.Domain.Dtos.BankAccount;
 using SistemaBancario.Domain.Models;
 
 namespace SistemaBancario.Domain.Interfaces.Services
 {
-    public interface IBankAccountService
+    public interface IBankAccountService : IService<BankAccountModel>
     {
-         void Withdraw(BankAccountModel bankAccountModel, double value);
-         void Deposit(BankAccountModel bankAccountModel, double value);
-         void Pay(BankAccountModel bankAccountModel, double value, string Description);
+         Task<bool> WithdrawAsync(BankAccountWithdrawDto bankAccount);
+         Task<bool> DepositAsync(BankAccountDepositDto bankAccount);
+         Task<bool> PayAsync(BankAccountPayDto bankAccount);
     }
 }

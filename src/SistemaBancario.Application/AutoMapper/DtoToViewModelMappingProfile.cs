@@ -10,10 +10,13 @@ namespace SistemaBancario.Application.AutoMapper
     {
         public DtoToViewModelMappingProfile()
         {
-            CreateMap<BankAccountDto, BankAccountViewModel>();
-            CreateMap<BankAccountWithTransactionsDto, BankAccountWithTransactionsViewModel>();
+            CreateMap<BankAccountDto, BankAccountViewModel>().ReverseMap();
+            CreateMap<BankAccountWithdrawDto, BankAccountWithdrawViewModel>().ReverseMap();
+            CreateMap<BankAccountDepositDto, BankAccountDepositViewModel>().ReverseMap();
+            CreateMap<BankAccountPayDto, BankAccountPayViewModel>().ReverseMap();
+            CreateMap<BankAccountWithTransactionsDto, BankAccountWithTransactionsViewModel>().ReverseMap();
 
-            CreateMap<TransactionDto, TransactionViewModel>();
+            CreateMap<TransactionDto, TransactionViewModel>().ReverseMap();
         }
     }
 }

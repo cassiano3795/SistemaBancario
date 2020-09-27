@@ -23,6 +23,10 @@ namespace SistemaBancario.Infra.IoC
             // ADD DOMAIN SERVICES
             services.AddDomainServices();
 
+            // ADD DOMAIN OBSERVERS
+            var provider = services.BuildServiceProvider();
+            services.AddObservers(provider);
+
             // ADD APP SERVICES
             services.AddAppServices();
 

@@ -7,7 +7,7 @@ namespace SistemaBancario.Domain.Enums
         [Description("Retirada")]
         Withdraw,
 
-        [Description("Deposito")]
+        [Description("Depósito")]
         Deposit,
 
         [Description("Pagamento")]

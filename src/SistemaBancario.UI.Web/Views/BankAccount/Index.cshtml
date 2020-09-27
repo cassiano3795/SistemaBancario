@@ -13,11 +13,17 @@
     <div class="col-xs-12 col-sm-6 col-md-6">
         <h1 class="d-inline">Saldo: </h1>
         <h3 class="d-inline  @(Model.BankAccount.Balance < 0 ? "text-danger" : Model.BankAccount.Balance > 0 ? "text-success" : "")">$@Model.BankAccount.Balance.ToString("0.00")</h3>
-    
-        @Html.Partial("~/Views/Shared/BankAccount/_Transactions.cshtml", @Model.Transactions)
+        <hr>
+        <partial name="~/Views/Shared/BankAccount/_Transactions.cshtml" model=@Model.Transactions />
     </div>
 
     <div class="col-xs-12 col-sm-6 col-md-6">
-        <h1>Botões</h1>
+        <h1>Operações</h1>
+        <hr>
+        <partial name="~/Views/Shared/BankAccount/_Operations.cshtml" />
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/js/BankAccount/BankAccountOperations.js" asp-append-version="true"></script>
+}

@@ -32,7 +32,7 @@ namespace SistemaBancario.Infra.Data.Repositories
                         TransactionType = t.TransactionType,
                         CreatedAt = t.CreatedAt,
                         Value = t.Value
-                    }).ToList()
+                    }).OrderByDescending(o => o.CreatedAt).ToList()
                 }).FirstOrDefaultAsync();
 
                 return bankAccount;

@@ -44,9 +44,8 @@ namespace SistemaBancario.Domain.Models
         /// Represents the action of paying using the account balance.
         /// </summary>
         /// <param name="value">Payment amount.</param>
-        /// <param name="description">Payment description.</param>
         /// <returns></returns>
-        public bool Pay(double value, string description)
+        public bool Pay(double value)
         {
             if (CheckBalance(value)){
                 Balance -= value;

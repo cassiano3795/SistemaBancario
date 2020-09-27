@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using SistemaBancario.Application.Interfaces;
 using SistemaBancario.Application.ViewModels.BankAccount;
+using SistemaBancario.Domain.Dtos.BankAccount;
 using SistemaBancario.Domain.Interfaces.Repositories;
 using SistemaBancario.Domain.Interfaces.Services;
 
@@ -21,7 +22,7 @@ namespace SistemaBancario.Application.Services
             _bankAccountRepository = bankAccountRepository;
         }
 
-        public async Task<BankAccountViewModel> GetByIdAsync(Guid id)
+        public Task<BankAccountViewModel> GetByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -32,6 +33,36 @@ namespace SistemaBancario.Application.Services
                 .Map<BankAccountWithTransactionsViewModel>(await _bankAccountRepository.GetBankAccountWithTransactionsByIdAsync(id));
             
             return banckAccountViewModel;
+        }
+
+        public async Task<bool> WithdrawAsync(BankAccountWithdrawViewModel bankAccount)
+        {
+            var id = new Guid("1d10e7a5-0fd5-4e48-b0b5-4dd97ad1fd7e");
+            var bankAccountDto = _mapper.Map<BankAccountWithdrawDto>(bankAccount);
+            bankAccountDto.Id = id;
+            var result = await _bankAccountService.WithdrawAsync(bankAccountDto);
+
+            return result;
+        }
+
+        public async Task<bool> DepositAsync(BankAccountDepositViewModel bankAccount)
+        {
+            var id = new Guid("1d10e7a5-0fd5-4e48-b0b5-4dd97ad1fd7e");
+            var bankAccountDto = _mapper.Map<BankAccountDepositDto>(bankAccount);
+            bankAccountDto.Id = id;
+            var result = await _bankAccountService.DepositAsync(bankAccountDto);
+
+            return result;
+        }
+
+        public async Task<bool> PayAsync(BankAccountPayViewModel bankAccount)
+        {
+            var id = new Guid("1d10e7a5-0fd5-4e48-b0b5-4dd97ad1fd7e");
+            var bankAccountDto = _mapper.Map<BankAccountPayDto>(bankAccount);
+            bankAccountDto.Id = id;
+            var result = await _bankAccountService.PayAsync(bankAccountDto);
+
+            return result;
         }
     }
 }

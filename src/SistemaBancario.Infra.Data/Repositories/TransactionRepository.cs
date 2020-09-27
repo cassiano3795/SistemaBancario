@@ -4,8 +4,7 @@ using SistemaBancario.Infra.Data.Context;
 
 namespace SistemaBancario.Infra.Data.Repositories
 {
-    public class TransactionRepository : BaseRepository<TransactionModel>, ITransactionRepository
-    {
+    public class TransactionRepository : BaseRepository<TransactionModel>, ITransactionRepository    {
         public TransactionRepository(AppDbContext appDbContext) : base(appDbContext)
         {
         }

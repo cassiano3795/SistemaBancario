@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,15 +11,9 @@ namespace SistemaBancario.Domain.Models
         [Column("id")]
         public Guid Id { get; set; }
 
-        private DateTime _createdAt;
-
         [Column("created_at")]
-        public DateTime CreatedAt
-        {
-            get { return _createdAt; }
-            set { _createdAt = DateTime.UtcNow; }
-        }
-        
+        public DateTime CreatedAt { get; set; }
+
         [Column("updated_at")]
         public DateTime? UpdatedAt { get; set; }
     }
