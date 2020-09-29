@@ -24,7 +24,7 @@ namespace SistemaBancario.Domain.Configurations
         public static void AddObservers(this IServiceCollection services, IServiceProvider provider)
         {
             // ADD OBSERVERS
-            var transactionService = (ITransactionService)provider.GetService(typeof(ITransactionService));
+            var transactionService = provider.GetService<ITransactionService>();
 
             var registerNewTransactionObserver = new RegisterNewTransactionObserver(transactionService);
             var transactionObservable = new TransactionObservable();

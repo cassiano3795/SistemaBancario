@@ -2,61 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaBancario.Infra.Data.Context;
 
 namespace SistemaBancario.UI.Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200928210220_Add field active on BaseModel")]
+    partial class AddfieldactiveonBaseModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("SistemaBancario.Domain.Models.BankAccountDailyInfoModel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasColumnType("char(36)");
-
-                    b.Property<decimal>("BalanceAtDate")
-                        .HasColumnName("balance_at_date")
-                        .HasColumnType("decimal(13, 2)");
-
-                    b.Property<Guid>("BankAccountId")
-                        .HasColumnName("bank_account_id")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnName("created_at")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<decimal>("IncomeBalance")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("income_balance")
-                        .HasColumnType("decimal(13, 2)")
-                        .HasDefaultValue(0m);
-
-                    b.Property<DateTime>("ReferenceDate")
-                        .HasColumnName("reference_date")
-                        .HasColumnType("date");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnName("updated_at")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BankAccountId", "ReferenceDate")
-                        .IsUnique();
-
-                    b.ToTable("bank_account_daily_info");
-                });
 
             modelBuilder.Entity("SistemaBancario.Domain.Models.BankAccountModel", b =>
                 {
@@ -69,11 +30,8 @@ namespace SistemaBancario.UI.Web.Migrations
                         .HasColumnName("account_number")
                         .HasColumnType("int");
 
-                    b.Property<ulong>("Active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("active")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                    b.Property<bool>("Active")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("Agency")
                         .HasColumnName("agency")
@@ -105,8 +63,11 @@ namespace SistemaBancario.UI.Web.Migrations
                         .HasColumnName("id")
                         .HasColumnType("char(36)");
 
+                    b.Property<bool>("Active")
+                        .HasColumnName("active")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<Guid>("BankAccountId")
-                        .HasColumnName("bank_account_id")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -135,15 +96,6 @@ namespace SistemaBancario.UI.Web.Migrations
                     b.HasIndex("BankAccountId");
 
                     b.ToTable("transaction");
-                });
-
-            modelBuilder.Entity("SistemaBancario.Domain.Models.BankAccountDailyInfoModel", b =>
-                {
-                    b.HasOne("SistemaBancario.Domain.Models.BankAccountModel", "BankAccount")
-                        .WithMany("DailyInfos")
-                        .HasForeignKey("BankAccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("SistemaBancario.Domain.Models.TransactionModel", b =>

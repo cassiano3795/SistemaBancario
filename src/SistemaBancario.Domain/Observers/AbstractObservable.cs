@@ -40,11 +40,28 @@ namespace SistemaBancario.Domain.Observers
             Items.Remove(item);
         }
 
+        public virtual void RemoveAll()
+        {
+            Items.Clear();
+        }
+
         public virtual void Notify(T item)
         {
-            foreach(var observer in Observers)
+            foreach (var observer in Observers)
             {
                 observer.OnNext(item);
+            }
+        }
+
+        public virtual void NotifyAll()
+        {
+            foreach (var item in Items)
+            {
+                foreach (var observer in Observers)
+                {
+                    observer.OnNext(item);
+                    Remove(item);
+                }
             }
         }
     }

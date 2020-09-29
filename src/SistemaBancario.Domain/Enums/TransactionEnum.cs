@@ -11,6 +11,9 @@ namespace SistemaBancario.Domain.Enums
         Deposit,
 
         [Description("Pagamento")]
-        Payment
+        Payment,
+        
+        [Description("Rendimento")]
+        Income
     }
 }

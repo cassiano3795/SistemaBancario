@@ -1,22 +1,27 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using SistemaBancario.Domain.Dtos.BankAccount;
 using SistemaBancario.Domain.Enums;
 using SistemaBancario.Domain.Interfaces.Repositories;
 using SistemaBancario.Domain.Interfaces.Services;
 using SistemaBancario.Domain.Models;
 using SistemaBancario.Domain.Observers.Transactions;
+using SistemaBancario.Domain.Strategies.BankAccount;
 
 namespace SistemaBancario.Domain.Services
 {
     public class BankAccountService : BaseService<BankAccountModel>, IBankAccountService
     {
+        private readonly IMapper _mapper;
         private readonly IBankAccountRepository _bankAccountRepository;
         private readonly TransactionObservable _transactionObservable;
 
-        public BankAccountService(IBankAccountRepository bankAccountRepository, TransactionObservable transactionObservable)
-            :base(bankAccountRepository)
+        public BankAccountService(IMapper mapper, IBankAccountRepository bankAccountRepository, TransactionObservable transactionObservable)
+            : base(bankAccountRepository)
         {
+            _mapper = mapper;
             _bankAccountRepository = bankAccountRepository;
             _transactionObservable = transactionObservable;
         }
@@ -29,7 +34,8 @@ namespace SistemaBancario.Domain.Services
             if (result)
             {
                 result = await _bankAccountRepository.SaveChangesAsync();
-                var transaction = new TransactionModel{
+                var transaction = new TransactionModel
+                {
                     BankAccountId = bankAccount.Id,
                     TransactionType = TransactionEnum.Withdraw,
                     Value = bankAccount.Value,
@@ -47,10 +53,11 @@ namespace SistemaBancario.Domain.Services
             var model = await _bankAccountRepository.SelectAsync(bankAccount.Id);
             model.Deposit(bankAccount.Value);
             var result = await _bankAccountRepository.SaveChangesAsync();
-            
+
             if (result)
             {
-                var transaction = new TransactionModel{
+                var transaction = new TransactionModel
+                {
                     BankAccountId = bankAccount.Id,
                     TransactionType = TransactionEnum.Deposit,
                     Value = bankAccount.Value,
@@ -67,11 +74,12 @@ namespace SistemaBancario.Domain.Services
         {
             var model = await _bankAccountRepository.SelectAsync(bankAccount.Id);
             var result = model.Pay(bankAccount.Value);
-            
+
             if (result)
             {
                 result = await _bankAccountRepository.SaveChangesAsync();
-                var transaction = new TransactionModel{
+                var transaction = new TransactionModel
+                {
                     BankAccountId = bankAccount.Id,
                     TransactionType = TransactionEnum.Payment,
                     Value = bankAccount.Value,

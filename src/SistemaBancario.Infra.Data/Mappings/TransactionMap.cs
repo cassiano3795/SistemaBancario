@@ -21,6 +21,10 @@ namespace SistemaBancario.Infra.Data.Mappings
                 .HasColumnType("int")
                 .IsRequired();
 
+            builder.Property(p => p.BankAccountId)
+                .HasColumnName("bank_account_id")
+                .IsRequired();
+
             builder.HasOne<BankAccountModel>(p => p.BankAccount)
                 .WithMany(p => p.Transactions)
                 .HasForeignKey(p => p.BankAccountId);

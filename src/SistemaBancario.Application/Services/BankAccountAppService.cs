@@ -37,7 +37,7 @@ namespace SistemaBancario.Application.Services
         public async Task<BankAccountWithTransactionsViewModel> GetBankAccountWithTransactionsByIdAsync(Guid id)
         {
             var banckAccountViewModel = _mapper
-                .Map<BankAccountWithTransactionsViewModel>(await _bankAccountRepository.GetBankAccountWithTransactionsByIdAsync(id));
+                .Map<BankAccountWithTransactionsViewModel>(await _bankAccountRepository.SelectWithTransactionsByIdAsync(id));
             
             return banckAccountViewModel;
         }

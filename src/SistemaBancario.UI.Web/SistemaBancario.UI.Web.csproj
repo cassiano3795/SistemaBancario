@@ -4,6 +4,7 @@
     <ProjectReference Include="..\SistemaBancario.Infra.IoC\SistemaBancario.Infra.IoC.csproj" />
     <ProjectReference Include="..\SistemaBancario.Application\SistemaBancario.Application.csproj" />
     <ProjectReference Include="..\SistemaBancario.Infra.Data\SistemaBancario.Infra.Data.csproj" />
+    <ProjectReference Include="..\SistemaBancario.Infra.CrossCutting\SistemaBancario.Infra.CrossCutting.csproj" />
   </ItemGroup>
 
   <ItemGroup>

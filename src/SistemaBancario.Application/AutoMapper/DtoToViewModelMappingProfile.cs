@@ -14,7 +14,6 @@ namespace SistemaBancario.Application.AutoMapper
             CreateMap<BankAccountWithdrawDto, BankAccountWithdrawViewModel>().ReverseMap();
             CreateMap<BankAccountDepositDto, BankAccountDepositViewModel>().ReverseMap();
             CreateMap<BankAccountPayDto, BankAccountPayViewModel>().ReverseMap();
-            CreateMap<BankAccountWithTransactionsDto, BankAccountWithTransactionsViewModel>().ReverseMap();
 
             CreateMap<TransactionDto, TransactionViewModel>().ReverseMap();
         }

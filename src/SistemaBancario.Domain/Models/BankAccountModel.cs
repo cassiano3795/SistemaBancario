@@ -7,8 +7,10 @@ namespace SistemaBancario.Domain.Models
         public int Agency { get; set; }
         public int AccountNumber { get; set; }
         public double Balance { get; private set; }
+        public bool Active { get; set; } = true;
 
         public virtual ICollection<TransactionModel> Transactions { get; set; }
+        public virtual ICollection<BankAccountDailyInfoModel> DailyInfos { get; set; }
 
         private bool CheckBalance(double value) => Balance - value >= 0 ? true : false;
 
@@ -47,7 +49,8 @@ namespace SistemaBancario.Domain.Models
         /// <returns></returns>
         public bool Pay(double value)
         {
-            if (CheckBalance(value)){
+            if (CheckBalance(value))
+            {
                 Balance -= value;
                 return true;
             }

@@ -25,6 +25,12 @@ namespace SistemaBancario.Infra.Data.Mappings
                 .HasColumnType("decimal(13, 2)")
                 .HasDefaultValue(0)
                 .IsRequired();
+
+            builder.Property(p => p.Active)
+                .HasColumnName("active")
+                .HasColumnType("bit")
+                .HasDefaultValue(true)
+                .IsRequired();
         }
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -10,30 +12,35 @@ using SistemaBancario.Infra.Data.Context;
 
 namespace SistemaBancario.Infra.Data.Repositories
 {
-    public class BankAccountRepository : BaseRepository<BankAccountModel>, IBankAccountRepository 
+    public class BankAccountRepository : BaseRepository<BankAccountModel>, IBankAccountRepository
     {
         public BankAccountRepository(AppDbContext appDbContext) : base(appDbContext)
         {
         }
 
-        public async Task<BankAccountWithTransactionsDto> GetBankAccountWithTransactionsByIdAsync(Guid id)
+        public async Task<IList<BankAccountModel>> SelectAllActiveAsync()
         {
             try
             {
-                var bankAccount = await _set.Include(x => x.Transactions).Where(x => x.Id == id).Select(s => new BankAccountWithTransactionsDto{
-                    BankAccount = new BankAccountDto{
-                        Id = s.Id,
-                        Agency = s.Agency,
-                        AccountNumber = s.AccountNumber,
-                        Balance = s.Balance
-                    },
-                    Transactions = s.Transactions.Select(t => new TransactionDto{
-                        Description = t.Description,
-                        TransactionType = t.TransactionType,
-                        CreatedAt = t.CreatedAt,
-                        Value = t.Value
-                    }).OrderByDescending(o => o.CreatedAt).ToList()
-                }).FirstOrDefaultAsync();
+                
+                var bankAccounts = await _set.Where(x => x.Active).ToListAsync();
+                return bankAccounts;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<BankAccountModel> SelectWithTransactionsByIdAsync(Guid id)
+        {
+            try
+            {
+                var bankAccount = await _set.Include(x => x.Transactions)
+                    .Where(x => x.Id == id && x.Active)
+                    .FirstOrDefaultAsync();
+                
+                bankAccount.Transactions = bankAccount.Transactions.OrderByDescending(o => o.CreatedAt).ToList();
 
                 return bankAccount;
             }
