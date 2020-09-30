@@ -76,6 +76,9 @@ END;
 CREATE EVENT update_bank_account_daily_infos_event
     ON SCHEDULE
         EVERY 24 DAY_HOUR
-        STARTS CURRENT_DATE
+        STARTS CURRENT_DATE - interval 1 DAY
     DO
         CALL update_bank_account_daily_infos();
+
+INSERT INTO bank_account(id, created_at, updated_at, agency, account_number, balance, active)
+VALUES (UUID(), NOW(), null, 1, 1, 0, true);

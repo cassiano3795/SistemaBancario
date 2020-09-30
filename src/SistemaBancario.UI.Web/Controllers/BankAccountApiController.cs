@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SistemaBancario.Application.Interfaces;
 using SistemaBancario.Application.ViewModels.BankAccount;
+using SistemaBancario.Domain.Validation;
 
 namespace SistemaBancario.UI.Web.Controllers
 {
-    [ApiController]
     [Route("api/BankAccount")]
-    public class BankAccountApiController : ControllerBase
+    public class BankAccountApiController : BaseApiController
     {
         private readonly IBankAccountAppService _bankAccountAppService;
 
@@ -19,35 +19,26 @@ namespace SistemaBancario.UI.Web.Controllers
 
         [HttpPost]
         [Route("withdraw")]
-        public async Task<bool> WithdrawAsync(BankAccountWithdrawViewModel bankAccount)
+        public async Task<ActionResult<IValidationResult>> WithdrawAsync(BankAccountWithdrawViewModel bankAccount)
         {
-            if (!ModelState.IsValid)
-                return false;
-
             var result = await _bankAccountAppService.WithdrawAsync(bankAccount);
-            return result;
+            return CustomResponse(result);
         }
 
         [HttpPost]
         [Route("deposit")]
-        public async Task<bool> DepositAsync(BankAccountDepositViewModel bankAccount)
+        public async Task<ActionResult<IValidationResult>> DepositAsync(BankAccountDepositViewModel bankAccount)
         {
-            if (!ModelState.IsValid)
-                return false;
-
             var result = await _bankAccountAppService.DepositAsync(bankAccount);
-            return result;
+            return CustomResponse(result);
         }
 
         [HttpPost]
         [Route("pay")]
-        public async Task<bool> PayAsync(BankAccountPayViewModel bankAccount)
+        public async Task<ActionResult<IValidationResult>> PayAsync(BankAccountPayViewModel bankAccount)
         {
-            if (!ModelState.IsValid)
-                return false;
-
             var result = await _bankAccountAppService.PayAsync(bankAccount);
-            return result;
+            return CustomResponse(result);
         }
     }
 }

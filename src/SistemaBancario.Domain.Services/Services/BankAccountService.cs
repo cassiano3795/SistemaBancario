@@ -8,7 +8,7 @@ using SistemaBancario.Domain.Interfaces.Repositories;
 using SistemaBancario.Domain.Interfaces.Services;
 using SistemaBancario.Domain.Models;
 using SistemaBancario.Domain.Observers.Transactions;
-using SistemaBancario.Domain.Strategies.BankAccount;
+using SistemaBancario.Domain.Validation;
 
 namespace SistemaBancario.Domain.Services
 {
@@ -26,14 +26,14 @@ namespace SistemaBancario.Domain.Services
             _transactionObservable = transactionObservable;
         }
 
-        public async Task<bool> WithdrawAsync(BankAccountWithdrawDto bankAccount)
+        public async Task<IValidationResult> WithdrawAsync(BankAccountWithdrawDto bankAccount)
         {
             var model = await _bankAccountRepository.SelectAsync(bankAccount.Id);
             var result = model.Withdraw(bankAccount.Value);
 
-            if (result)
+            if (result.IsValid)
             {
-                result = await _bankAccountRepository.SaveChangesAsync();
+                await _bankAccountRepository.SaveChangesAsync();
                 var transaction = new TransactionModel
                 {
                     BankAccountId = bankAccount.Id,
@@ -48,13 +48,13 @@ namespace SistemaBancario.Domain.Services
 
             return result;
         }
-        public async Task<bool> DepositAsync(BankAccountDepositDto bankAccount)
+        public async Task<IValidationResult> DepositAsync(BankAccountDepositDto bankAccount)
         {
             var model = await _bankAccountRepository.SelectAsync(bankAccount.Id);
-            model.Deposit(bankAccount.Value);
-            var result = await _bankAccountRepository.SaveChangesAsync();
+            var result = model.Deposit(bankAccount.Value);
+            await _bankAccountRepository.SaveChangesAsync();
 
-            if (result)
+            if (result.IsValid)
             {
                 var transaction = new TransactionModel
                 {
@@ -70,14 +70,14 @@ namespace SistemaBancario.Domain.Services
 
             return result;
         }
-        public async Task<bool> PayAsync(BankAccountPayDto bankAccount)
+        public async Task<IValidationResult> PayAsync(BankAccountPayDto bankAccount)
         {
             var model = await _bankAccountRepository.SelectAsync(bankAccount.Id);
             var result = model.Pay(bankAccount.Value);
 
-            if (result)
+            if (result.IsValid)
             {
-                result = await _bankAccountRepository.SaveChangesAsync();
+                await _bankAccountRepository.SaveChangesAsync();
                 var transaction = new TransactionModel
                 {
                     BankAccountId = bankAccount.Id,

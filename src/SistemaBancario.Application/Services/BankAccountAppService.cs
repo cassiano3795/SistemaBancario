@@ -7,6 +7,7 @@ using SistemaBancario.Application.ViewModels.BankAccount;
 using SistemaBancario.Domain.Dtos.BankAccount;
 using SistemaBancario.Domain.Interfaces.Repositories;
 using SistemaBancario.Domain.Interfaces.Services;
+using SistemaBancario.Domain.Validation;
 
 namespace SistemaBancario.Application.Services
 {
@@ -42,7 +43,7 @@ namespace SistemaBancario.Application.Services
             return banckAccountViewModel;
         }
 
-        public async Task<bool> WithdrawAsync(BankAccountWithdrawViewModel bankAccount)
+        public async Task<IValidationResult> WithdrawAsync(BankAccountWithdrawViewModel bankAccount)
         {
             var id = new Guid("1d10e7a5-0fd5-4e48-b0b5-4dd97ad1fd7e");
             var bankAccountDto = _mapper.Map<BankAccountWithdrawDto>(bankAccount);
@@ -52,7 +53,7 @@ namespace SistemaBancario.Application.Services
             return result;
         }
 
-        public async Task<bool> DepositAsync(BankAccountDepositViewModel bankAccount)
+        public async Task<IValidationResult> DepositAsync(BankAccountDepositViewModel bankAccount)
         {
             var id = new Guid("1d10e7a5-0fd5-4e48-b0b5-4dd97ad1fd7e");
             var bankAccountDto = _mapper.Map<BankAccountDepositDto>(bankAccount);
@@ -62,7 +63,7 @@ namespace SistemaBancario.Application.Services
             return result;
         }
 
-        public async Task<bool> PayAsync(BankAccountPayViewModel bankAccount)
+        public async Task<IValidationResult> PayAsync(BankAccountPayViewModel bankAccount)
         {
             var id = new Guid("1d10e7a5-0fd5-4e48-b0b5-4dd97ad1fd7e");
             var bankAccountDto = _mapper.Map<BankAccountPayDto>(bankAccount);

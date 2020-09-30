@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SistemaBancario.Domain.Validation;
 
 namespace SistemaBancario.Domain.Models
 {
@@ -12,22 +13,31 @@ namespace SistemaBancario.Domain.Models
         public virtual ICollection<TransactionModel> Transactions { get; set; }
         public virtual ICollection<BankAccountDailyInfoModel> DailyInfos { get; set; }
 
-        private bool CheckBalance(double value) => Balance - value >= 0 ? true : false;
+        private IValidationResult CheckBalance(double value)
+        {
+            var validationResult = new ValidationResult();
+            if (Balance - value < 0)
+            {
+                validationResult.AddError("Saldo insuficiente");
+            }
+
+            return validationResult;
+        }
 
         /// <summary>
         /// Represents the action of withdrawing money from an account. 
         /// </summary>
         /// <param name="value">Withdrawal amount.</param>
         /// <returns></returns>
-        public bool Withdraw(double value)
+        public IValidationResult Withdraw(double value)
         {
-            if (CheckBalance(value))
+            var result = CheckBalance(value);
+            if (result.IsValid)
             {
                 Balance -= value;
-                return true;
             }
 
-            return false;
+            return result;
 
         }
 
@@ -36,10 +46,10 @@ namespace SistemaBancario.Domain.Models
         /// </summary>
         /// <param name="value">Deposit amount.</param>
         /// <returns></returns>
-        public void Deposit(double value)
+        public IValidationResult Deposit(double value)
         {
             Balance += value;
-            return;
+            return new ValidationResult();
         }
 
         /// <summary>
@@ -47,15 +57,15 @@ namespace SistemaBancario.Domain.Models
         /// </summary>
         /// <param name="value">Payment amount.</param>
         /// <returns></returns>
-        public bool Pay(double value)
+        public IValidationResult Pay(double value)
         {
-            if (CheckBalance(value))
+            var result = CheckBalance(value);
+            if (result.IsValid)
             {
                 Balance -= value;
-                return true;
             }
 
-            return false;
+            return result;
         }
     }
 }

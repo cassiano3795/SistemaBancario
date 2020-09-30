@@ -15,11 +15,12 @@ class BankAccountOperations {
     async Transaction(event) {
         event.preventDefault();
         const operation = event.target.dataset.operation;
+        const input = document.getElementById("inputValue");
 
         console.log("Iniciando saque.")
 
         const data = {
-            value: parseFloat(document.getElementById("inputValue").value) || 0
+            value: parseFloat(input.value) || 0
         }
 
         console.log("Enviando requisição AJAX");
@@ -40,6 +41,7 @@ class BankAccountOperations {
             window.location.reload();
         } else {
             const errors = result.errors.Value.join(".\n");
+            input.value = "";
             alert(errors);
         }
     }

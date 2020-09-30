@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using SistemaBancario.Domain.Dtos.BankAccount;
 using SistemaBancario.Domain.Models;
-using SistemaBancario.Domain.Strategies.BankAccount;
+using SistemaBancario.Domain.Validation;
 
 namespace SistemaBancario.Domain.Interfaces.Services
 {
     public interface IBankAccountService : IService<BankAccountModel>
     {
-        Task<bool> WithdrawAsync(BankAccountWithdrawDto bankAccount);
-        Task<bool> DepositAsync(BankAccountDepositDto bankAccount);
-        Task<bool> PayAsync(BankAccountPayDto bankAccount);
+        Task<IValidationResult> WithdrawAsync(BankAccountWithdrawDto bankAccount);
+        Task<IValidationResult> DepositAsync(BankAccountDepositDto bankAccount);
+        Task<IValidationResult> PayAsync(BankAccountPayDto bankAccount);
     }
 }
