@@ -22,7 +22,7 @@ namespace SistemaBancario.Infra.Data.Mappings
 
             builder.Property(p => p.Balance)
                 .HasColumnName("balance")
-                .HasColumnType("decimal(13, 2)")
+                .HasColumnType("decimal(13, 7)")
                 .HasDefaultValue(0)
                 .IsRequired();
 

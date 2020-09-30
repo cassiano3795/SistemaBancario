@@ -32,11 +32,13 @@ namespace SistemaBancario.Infra.Data.Repositories
             }
         }
 
-        public async Task<BankAccountModel> SelectWithTransactionsByIdAsync(Guid id)
+        public async Task<BankAccountModel> SelectWithTransactionsAndInfosByIdAsync(Guid id)
         {
             try
             {
-                var bankAccount = await _set.Include(x => x.Transactions)
+                var bankAccount = await _set
+                    .Include(x => x.Transactions)
+                    .Include(X => X.DailyInfos)
                     .Where(x => x.Id == id && x.Active)
                     .FirstOrDefaultAsync();
                 

@@ -12,12 +12,12 @@ namespace SistemaBancario.Infra.Data.Mappings
 
             builder.Property(p => p.BalanceAtDate)
                 .HasColumnName("balance_at_date")
-                .HasColumnType("decimal(13, 2)")
+                .HasColumnType("decimal(13, 7)")
                 .IsRequired();
 
             builder.Property(p => p.IncomeBalance)
                 .HasColumnName("income_balance")
-                .HasColumnType("decimal(13, 2)")
+                .HasColumnType("decimal(13, 7)")
                 .HasDefaultValue(0)
                 .IsRequired();
 

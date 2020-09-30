@@ -12,6 +12,7 @@ namespace SistemaBancario.Application.AutoMapper
             // BANK ACCOUNT
             CreateMap<BankAccountModel, BankAccountViewModel>().ReverseMap();
             CreateMap<BankAccountModel, BankAccountWithTransactionsViewModel>();
+            CreateMap<BankAccountDailyInfoModel, BankAccountDailyInfoViewModel>();
 
             // TRANSACTION
             CreateMap<TransactionModel, TransactionViewModel>().ReverseMap();

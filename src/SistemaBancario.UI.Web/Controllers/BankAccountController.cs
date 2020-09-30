@@ -25,7 +25,7 @@ namespace SistemaBancario.UI.Web.Controllers
         public async Task<IActionResult> IndexAsync()
         {
             var id = (await _accountAppService.GetAllAsync()).FirstOrDefault().Id;
-            var bankAccountViewModel = await _accountAppService.GetBankAccountWithTransactionsByIdAsync(id);
+            var bankAccountViewModel = await _accountAppService.GetBankAccountWithTransactionsAndInfosByIdAsync(id);
             return View(bankAccountViewModel);
         }
 

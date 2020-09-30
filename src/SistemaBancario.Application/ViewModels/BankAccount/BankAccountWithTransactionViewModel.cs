@@ -11,5 +11,6 @@ namespace SistemaBancario.Application.ViewModels.BankAccount
         public int AccountNumber { get; set; }
         public double Balance { get; private set; }
         public IList<TransactionViewModel> Transactions { get; set; }
+        public IList<BankAccountDailyInfoViewModel> DailyInfos { get; set; }
     }
 }

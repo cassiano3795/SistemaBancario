@@ -8,6 +8,6 @@ namespace SistemaBancario.Domain.Interfaces.Repositories
     public interface IBankAccountRepository : IRepository<BankAccountModel>
     {
         Task<IList<BankAccountModel>> SelectAllActiveAsync();
-        Task<BankAccountModel> SelectWithTransactionsByIdAsync(Guid id);
+        Task<BankAccountModel> SelectWithTransactionsAndInfosByIdAsync(Guid id);
     }
 }

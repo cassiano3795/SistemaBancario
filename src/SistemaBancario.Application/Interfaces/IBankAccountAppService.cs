@@ -9,7 +9,7 @@ namespace SistemaBancario.Application.Interfaces
     {
         Task<IList<BankAccountViewModel>> GetAllAsync();
         Task<BankAccountViewModel> GetByIdAsync(Guid id);
-        Task<BankAccountWithTransactionsViewModel> GetBankAccountWithTransactionsByIdAsync(Guid id);
+        Task<BankAccountWithTransactionsViewModel> GetBankAccountWithTransactionsAndInfosByIdAsync(Guid id);
         Task<bool> WithdrawAsync(BankAccountWithdrawViewModel bankAccount);
         Task<bool> DepositAsync(BankAccountDepositViewModel bankAccount);
         Task<bool> PayAsync(BankAccountPayViewModel bankAccount);

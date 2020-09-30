@@ -9,10 +9,19 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div> *@
 
+@{
+    var saldo = Math.Floor(Model.Balance * 100) / 100;
+    var rendimento = Math.Floor(Model.DailyInfos.Sum(s => s.IncomeBalance) * 100) / 100;
+}
+
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6">
         <h1 class="d-inline">Saldo: </h1>
-        <h3 class="d-inline  @(Model.Balance < 0 ? "text-danger" : Model.Balance > 0 ? "text-success" : "")">R$@string.Format("{0:N2}", Model.Balance)</h3>
+        <h3 class="d-inline  @(saldo < 0 ? "text-danger" : saldo > 0 ? "text-success" : "")">R$@string.Format("{0:N2}", Math.Floor(Model.Balance * 100) / 100)</h3>
+        <br>
+        
+        <h1 class="d-inline">Rendimento: </h1>
+        <h3 class="d-inline @(rendimento < 0 ? "text-danger" : rendimento > 0 ? "text-success" : "")">R$ @string.Format("{0:N2}", rendimento)</h3>
         <hr>
         <partial name="~/Views/Shared/BankAccount/_Transactions.cshtml" model=@Model.Transactions />
     </div>
