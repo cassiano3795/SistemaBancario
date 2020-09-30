@@ -20,6 +20,18 @@ namespace SistemaBancario.Domain.Tests.BankAccountModelTests
         }
 
         [Theory]
+        [InlineData(0)]
+        [InlineData(-3)]
+        [InlineData(-500)]
+        public void DepositValueLessThanZero(double value)
+        {
+            var model = GetBankAccountModel();
+            var result = model.Deposit(value);
+            
+            Assert.False(result.IsValid);
+        }
+
+        [Theory]
         [InlineData(new double[] {200, 500})]
         [InlineData(new double[] {600, 1, 65.68})]
         [InlineData(new double[] {755, 852})]

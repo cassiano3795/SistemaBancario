@@ -24,6 +24,17 @@ namespace SistemaBancario.Domain.Models
             return validationResult;
         }
 
+        private IValidationResult CheckValueOperation(double value)
+        {
+            var validationResult = new ValidationResult();
+            if (value <= 0)
+            {
+                validationResult.AddError("Valor deve ser maior que 0");
+            }
+
+            return validationResult;
+        }
+
         /// <summary>
         /// Represents the action of withdrawing money from an account. 
         /// </summary>
@@ -48,8 +59,13 @@ namespace SistemaBancario.Domain.Models
         /// <returns></returns>
         public IValidationResult Deposit(double value)
         {
-            Balance += value;
-            return new ValidationResult();
+            var result = CheckValueOperation(value);
+            if (result.IsValid)
+            {
+                Balance += value;
+            }
+
+            return result;
         }
 
         /// <summary>
