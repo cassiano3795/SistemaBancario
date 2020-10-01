@@ -6,8 +6,7 @@ BEGIN
     DECLARE balance DECIMAL(13,7);
     SET percent = 0.000043333;
 
-    SELECT balance INTO balance FROM dbSistemaBancario.bank_account WHERE id = bank_account_id AND active IS TRUE AND balance > 0;
-
+    SELECT bank_account.balance INTO balance FROM dbSistemaBancario.bank_account WHERE id = bank_account_id AND bank_account.balance > 0;
     IF (balance IS NULL) THEN
         SET balance = 0;
     END IF;
