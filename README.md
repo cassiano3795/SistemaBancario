@@ -1,7 +1,7 @@
 # SistemaBancario
 
 Instruções para rodar o projeto:
-1 - Alterar a ConnectionStrings do appsetting.Development;
+1 - Alterar usuário e senha da connection string "SistemaBancario" do appsetting.Development;
 2 - Rodar as migrations do projeto SistemaBancario.UI.Web;
 3 - Rodar os scripts do arquivo ./sql/sistema_bancario.sql;
 4 - Executar o projeto;
