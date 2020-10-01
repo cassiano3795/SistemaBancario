@@ -35,8 +35,7 @@ namespace SistemaBancario.Domain.Services
         }
         public async Task<bool> RemoveAsync(Guid id)
         {
-            var model = await _baseRepository.SelectAsync(id);
-            await _baseRepository.DeleteAsync(model);
+            await _baseRepository.DeleteAsync(id);
             var result = await _baseRepository.SaveChangesAsync();
 
             return result;

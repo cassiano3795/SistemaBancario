@@ -7,7 +7,7 @@ namespace SistemaBancario.Domain.Tests.BankAccountModelTests
 {
     public class BankAccountModelDeposit
     {
-         private BankAccountModel GetBankAccountModel()
+        private BankAccountModel GetBankAccountModel()
         {
             var model = new BankAccountModel
             {
@@ -27,16 +27,16 @@ namespace SistemaBancario.Domain.Tests.BankAccountModelTests
         {
             var model = GetBankAccountModel();
             var result = model.Deposit(value);
-            
+
             Assert.False(result.IsValid);
         }
 
         [Theory]
-        [InlineData(new double[] {200, 500})]
-        [InlineData(new double[] {600, 1, 65.68})]
-        [InlineData(new double[] {755, 852})]
-        [InlineData(new double[] {958, 697})]
-        [InlineData(new double[] {200, 457,36})]
+        [InlineData(new double[] { 200, 500 })]
+        [InlineData(new double[] { 600, 1, 65.68 })]
+        [InlineData(new double[] { 755, 852 })]
+        [InlineData(new double[] { 958, 697 })]
+        [InlineData(new double[] { 200, 457, 36 })]
         public void CheckBankAccountAfterDeposit(double[] values)
         {
             var model = GetBankAccountModel();

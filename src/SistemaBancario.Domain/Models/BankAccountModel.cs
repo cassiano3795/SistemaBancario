@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using SistemaBancario.Domain.Validation;
 
 namespace SistemaBancario.Domain.Models
 {
     public class BankAccountModel : BaseModel
     {
+        public string Name { get; set; }
         public int Agency { get; set; }
         public int AccountNumber { get; set; }
         public double Balance { get; private set; }

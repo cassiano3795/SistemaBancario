@@ -10,6 +10,11 @@ namespace SistemaBancario.Infra.Data.Mappings
         {
             builder.ToTable("bank_account");
 
+            builder.Property(p => p.Name)
+                .HasColumnName("name")
+                .HasColumnType("varchar(100)")
+                .IsRequired();
+
             builder.Property(p => p.Agency)
                 .HasColumnName("agency")
                 .HasColumnType("int")

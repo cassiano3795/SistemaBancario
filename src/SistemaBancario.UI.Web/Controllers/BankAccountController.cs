@@ -22,10 +22,11 @@ namespace SistemaBancario.UI.Web.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
             var id = (await _accountAppService.GetAllAsync()).FirstOrDefault().Id;
             var bankAccountViewModel = await _accountAppService.GetBankAccountWithTransactionsAndInfosByIdAsync(id);
+            ViewBag.Name = bankAccountViewModel.Name;
             return View(bankAccountViewModel);
         }
 

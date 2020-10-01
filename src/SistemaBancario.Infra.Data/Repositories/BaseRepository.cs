@@ -77,11 +77,11 @@ namespace SistemaBancario.Infra.Data.Repositories
                 throw ex;
             }
         }
-        public async Task DeleteAsync(T model)
+        public async Task DeleteAsync(Guid id)
         {
             try
             {
-                var modelDb = await SelectAsync(model.Id);
+                var modelDb = await SelectAsync(id);
 
                 _set.Remove(modelDb);
                 return;

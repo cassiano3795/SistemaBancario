@@ -6,6 +6,7 @@ namespace SistemaBancario.Application.ViewModels.BankAccount
 {
     public class BankAccountWithTransactionsViewModel
     {
+        public string Name { get; set; }
         public Guid Id { get; set; }
         public int Agency { get; set; }
         public int AccountNumber { get; set; }
