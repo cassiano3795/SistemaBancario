@@ -80,5 +80,6 @@ CREATE EVENT update_bank_account_daily_infos_event
     DO
     CALL update_bank_account_daily_infos();
 
-INSERT INTO bank_account(id, created_at, updated_at, agency, account_number, balance, active)
-VALUES ('1d10e7a5-0fd5-4e48-b0b5-4dd97ad1fd7e', NOW(), null, 1, 1, 0, true);
+-- INSERT REALIZADO PARA FINS DE TESTE, EM PRODUÇÃO USUÁRIO DEVERÁ SER IDENTIFICADO POR JWT OU SESSION COM IDENTITY
+INSERT INTO bank_account(id, created_at, updated_at, agency, account_number, balance, active, name)
+VALUES ('1d10e7a5-0fd5-4e48-b0b5-4dd97ad1fd7e', NOW(), null, 1, 1, 0, true, 'Frederick');
